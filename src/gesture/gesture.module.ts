@@ -1,8 +1,11 @@
 import { NgModule } from '@angular/core';
+import { MultipleGestureDirective } from './multiple-gesture.directive';
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    MultipleGestureDirective
+  ],
   imports: [],
-  exports: [],
+  exports: [MultipleGestureDirective],
 })
 export class GestureModule {}
