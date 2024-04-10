@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -6,9 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  public imageUrl = '';
-  constructor() {}
-  public updateImageUrl($event: string) {
-    this.imageUrl = `../assets/${$event}.jpg`;
+
+  constructor() {
+    
   }
 }
