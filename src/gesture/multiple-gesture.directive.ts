@@ -2,10 +2,9 @@ import { Directive, ElementRef } from '@angular/core';
 import TinyGesture, { Options } from 'tinygesture';
 
 @Directive({
-  selector: '[appMultipleGesture]'
+  selector: '[appMultipleGesture]',
 })
 export class MultipleGestureDirective {
-
   // Options object is optional. These are the defaults.
   private options: Partial<Options<HTMLElement>> = {
     // Used to calculate the threshold to consider a movement a swipe. it is
@@ -15,10 +14,10 @@ export class MultipleGestureDirective {
         25,
         Math.floor(
           0.15 *
-          (type === 'x'
-            ? window.innerWidth || document.body.clientWidth
-            : window.innerHeight || document.body.clientHeight),
-        ),
+            (type === 'x'
+              ? window.innerWidth || document.body.clientWidth
+              : window.innerHeight || document.body.clientHeight)
+        )
       ),
     // Minimum velocity the gesture must be moving when the gesture ends to be
     // considered a swipe.
@@ -26,7 +25,10 @@ export class MultipleGestureDirective {
     // Used to calculate the distance threshold to ignore the gestures velocity
     // and always consider it a swipe.
     disregardVelocityThreshold: (type, self) =>
-      Math.floor(0.5 * (type === 'x' ? self.element.clientWidth : self.element.clientHeight)),
+      Math.floor(
+        0.5 *
+          (type === 'x' ? self.element.clientWidth : self.element.clientHeight)
+      ),
     // Point at which the pointer moved too much to consider it a tap or longpress
     // gesture.
     pressThreshold: 8,
@@ -42,12 +44,14 @@ export class MultipleGestureDirective {
     mouseSupport: true,
   };
 
-  private targetedHTMLElement: HTMLElement
+  private targetedHTMLElement: HTMLElement;
 
-  constructor(elementRef:ElementRef) {
+  constructor(elementRef: ElementRef) {
     this.targetedHTMLElement = elementRef.nativeElement as HTMLElement;
     const gesture = new TinyGesture(this.targetedHTMLElement, this.options);
-    console.log('TinyGesture Initiated with targeted element and default options', gesture)
+    console.log(
+      'TinyGesture Initiated with targeted element and default options',
+      gesture
+    );
   }
-
 }
