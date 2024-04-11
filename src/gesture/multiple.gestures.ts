@@ -43,10 +43,20 @@ export abstract class MultipleGestures {
 
   public targetedHTMLElement: HTMLElement;
   public gesture: TinyGesture;
+
   constructor(elementRef: ElementRef) {
     this.targetedHTMLElement = elementRef.nativeElement as HTMLElement;
     this.gesture = new TinyGesture(this.targetedHTMLElement, this.options);
+    this.preventDefaultHandler();
+    this.handleGestures();
   }
+
+  private preventDefaultHandler(): void {
+    this.targetedHTMLElement.removeEventListener('touchstart', (event) => {
+      event.preventDefault();
+    });
+  }
+  public handleGestures(): void {}
 
   public addTransition(transition: string) {
     this.targetedHTMLElement.style.transition =

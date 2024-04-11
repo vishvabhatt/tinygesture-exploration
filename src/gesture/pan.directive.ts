@@ -8,13 +8,10 @@ export class PanDirective extends MultipleGestures {
   private animationFrame: number | undefined = undefined;
   constructor(elementRef: ElementRef) {
     super(elementRef);
-    this.handleGesture();
   }
 
-  private handleGesture(): void {
-    console.log('handleGestureMethod-pandirective');
+  override handleGestures(): void {
     // Don't allow the page to scroll when the target is first pressed.
-    this.preventDefaultHandler();
     this.addTransition('opacity .3s ease');
     this.gesture.on('panstart', () => {
       // Remove left and top transitions so the target updates its position immediately.
@@ -54,12 +51,6 @@ export class PanDirective extends MultipleGestures {
       this.targetedHTMLElement.style.left = '0px';
       this.targetedHTMLElement.style.top = '0px';
       this.targetedHTMLElement.style.opacity = '1';
-    });
-  }
-
-  private preventDefaultHandler(): void {
-    this.targetedHTMLElement.removeEventListener('touchstart', (event) => {
-      event.preventDefault();
     });
   }
 }
