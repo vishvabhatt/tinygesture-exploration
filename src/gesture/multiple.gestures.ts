@@ -33,7 +33,7 @@ export abstract class MultipleGestures {
     // vertical swipe.
     // If false, whichever direction the pointer moved more will be the only swipe
     // fired.
-    diagonalSwipes: false,
+    diagonalSwipes: true,
     // The degree limit to consider a diagonal swipe when diagonalSwipes is true.
     // It's calculated as 45deg±diagonalLimit.
     diagonalLimit: 15,
