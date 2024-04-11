@@ -42,12 +42,31 @@ export abstract class MultipleGestures {
   };
 
   public targetedHTMLElement: HTMLElement;
+  public gesture: TinyGesture;
   constructor(elementRef: ElementRef) {
     this.targetedHTMLElement = elementRef.nativeElement as HTMLElement;
-    const gesture = new TinyGesture(this.targetedHTMLElement, this.options);
+    this.gesture = new TinyGesture(this.targetedHTMLElement, this.options);
     console.log(
       'TinyGesture Initiated with targeted element and default options',
-      gesture
+      this.gesture
     );
+  }
+
+  public addTransition(transition: string) {
+    this.targetedHTMLElement.style.transition =
+      (this.targetedHTMLElement.style.transition
+        ? this.targetedHTMLElement.style.transition + ', '
+        : '') + transition;
+  }
+  public removeTransition(transition: string) {
+    const match = this.targetedHTMLElement.style.transition.match(
+      new RegExp('(?:^|,)\\s*' + transition + '(?:$|\\s|,)[^,]*', 'i')
+    );
+    if (match?.index) {
+      const transitionArray =
+        this.targetedHTMLElement.style.transition.split('');
+      transitionArray.splice(match.index, match[0].length);
+      this.targetedHTMLElement.style.transition = transitionArray.join('');
+    }
   }
 }
