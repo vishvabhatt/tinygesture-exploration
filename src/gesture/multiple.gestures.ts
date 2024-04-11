@@ -46,10 +46,6 @@ export abstract class MultipleGestures {
   constructor(elementRef: ElementRef) {
     this.targetedHTMLElement = elementRef.nativeElement as HTMLElement;
     this.gesture = new TinyGesture(this.targetedHTMLElement, this.options);
-    console.log(
-      'TinyGesture Initiated with targeted element and default options',
-      this.gesture
-    );
   }
 
   public addTransition(transition: string) {

@@ -17,25 +17,16 @@ export class PanDirective extends MultipleGestures {
     this.preventDefaultHandler();
     this.addTransition('opacity .3s ease');
     this.gesture.on('panstart', () => {
-      console.log('panstartr');
       // Remove left and top transitions so the target updates its position immediately.
       this.removeTransition('left');
       this.removeTransition('top');
     });
 
     this.gesture.on('panmove', () => {
-      console.log('panmove');
-
       if (this.animationFrame) {
         return;
       }
       this.animationFrame = window.requestAnimationFrame(() => {
-        console.log(
-          'this.gesture.scale',
-          this.gesture.scale,
-          'this.gesture.swipingDirection',
-          this.gesture.swipingDirection
-        );
         if (this.gesture.scale && this.gesture.swipingDirection)
           if (this.gesture.scale <= 1.1 && this.gesture.scale >= 0.9) {
             // Give an indication of whether we've passed the swiping threshold.
@@ -67,12 +58,8 @@ export class PanDirective extends MultipleGestures {
   }
 
   private preventDefaultHandler(): void {
-    this.targetedHTMLElement.addEventListener(
-      'touchstart',
-      (event) => {
-        event.preventDefault();
-      },
-      { passive: false }
-    );
+    this.targetedHTMLElement.removeEventListener('touchstart', (event) => {
+      event.preventDefault();
+    });
   }
 }
